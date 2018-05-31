@@ -1,0 +1,20 @@
+{
+  "name": "redux_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "nyc mocha test/* --recursive",
+    "start": "babel -w *.js --out-dir dist"
+  },
+  "author": "arodriguez@tribalscale.com",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.4.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1"
+  }
+}
