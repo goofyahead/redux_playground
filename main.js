@@ -94,6 +94,33 @@ const filterTodos = (state) => {
     }
 }
 
+const TodoItem = (
+    {onclick, completed, text}) => (
+    <li onClick={onclick}
+        style={{
+            textDecoration: completed ? 'line-through' : 'none'
+        }}>
+        {text}
+    </li>
+)
+
+const TodoList = (
+    {
+        todos,
+        onTodoClick
+    }) => (
+    <ul>
+        {todos.map((todo) => {
+            return <TodoItem key={todo.id}
+                             onclick={onTodoClick(todo.id)}
+                             completed={todo.completed}
+                             text={todo.text}
+            />
+        })}
+    </ul>
+)
+
+
 class TodoApp extends Component {
     render() {
         const filtered = filterTodos(this.props)
@@ -111,14 +138,13 @@ class TodoApp extends Component {
                 }
                 }> Add TODO
                 </button>
-                <ul>
-                    {filtered.map((todo) => <li key={todo.id} onClick={() => store.dispatch({
+                <TodoList
+                    todos={filtered}
+                    onclick={(id) => store.dispatch({
                         type: 'TOGGLE_TODO',
-                        id: todo.id
-                    })} style={{
-                        textDecoration: todo.completed ? 'line-through' : 'none'
-                    }}> {todo.text} </li>)}
-                </ul>
+                        id: id
+                    })}
+                />
                 <p>
                     Filter by: <br/>
                     <FilterLink currentFilter={this.props.visibility} filter='ALL'>All</FilterLink>
